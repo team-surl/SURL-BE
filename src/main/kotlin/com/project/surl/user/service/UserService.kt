@@ -34,15 +34,14 @@ class UserService(
     }
 
     suspend fun signIn(request: SignInRequest): TokenResponse =
-        with(request) {
-            val userEntity = userRepository.findByAccountId(accountId)
-                ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "AccountId Not Found.")
+        with(userRepository.findByAccountId(request.accountId)) {
+            this ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "AccountId Not Found.")
 
-            if (!BcryptUtils.verify(rawPassword = password, encodedPassword = userEntity.password)) {
+            if (!BcryptUtils.verify(rawPassword = request.password, encodedPassword = password)) {
                 throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "Password Not Match.")
             }
 
-            val claim = JwtClaim(accountId = userEntity.accountId, username = userEntity.username)
+            val claim = JwtClaim(accountId = accountId, username = username)
             val token = JwtUtils.generateToken(claim, jwtProperties)
             TokenResponse(accessToken = token)
         }
