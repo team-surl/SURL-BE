@@ -1,0 +1,19 @@
+server:
+  shutdown: graceful
+
+spring:
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/surl?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: root
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+    time-zone: Asia/Seoul
+
+jwt:
+  issuer: surl
+  subject: auth
+  expiration: 3600000
+  secret: surl-jwt-secret
