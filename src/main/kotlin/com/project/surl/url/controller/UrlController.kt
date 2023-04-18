@@ -18,7 +18,7 @@ class UrlController(
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/test")
+    @PostMapping("/short-url")
     suspend fun generateShortUrl(@RequestBody request: GenerateShortUrlRequest): GetShortUrlResponse {
         return urlService.generateShortUrl(request)
     }
