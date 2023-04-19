@@ -24,7 +24,7 @@ class UrlController(
     }
 
     @GetMapping("/{shortUrl}")
-    suspend fun getUrl(@PathVariable shortUrl: String): GetUrlResponse {
+    suspend fun getUrl(@PathVariable shortUrl: String): String {
         return urlService.getUrl(shortUrl)
     }
 }
