@@ -33,10 +33,10 @@ class UrlService(
         return GetShortUrlResponse("${BASE_URL}/${urlEntity.shortUrl}")
     }
 
-    suspend fun getUrl(shortUrl: String): GetUrlResponse {
+    suspend fun getUrl(shortUrl: String): String {
         val urlEntity = urlRepository.findByShortUrl(shortUrl)
             ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "SURL Not Found.")
 
-        return GetUrlResponse(urlEntity.url)
+        return urlEntity.url
     }
 }
