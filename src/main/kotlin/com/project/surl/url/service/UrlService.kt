@@ -16,7 +16,7 @@ class UrlService(
 ) {
 
     companion object {
-        private const val BASE_URL = "http://localhost:8080" //TODO: 도메인 변경!
+        private const val BASE_URL = "http://13.125.198.137:8080"
     }
 
     suspend fun generateShortUrl(request: GenerateShortUrlRequest): GetShortUrlResponse {
