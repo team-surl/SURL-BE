@@ -19,6 +19,9 @@ data class VisitorEntity(
     val ip: String,
 
     @Column
+    val country: String,
+
+    @Column
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
     @Version

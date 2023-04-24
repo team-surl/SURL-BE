@@ -10,12 +10,15 @@ import com.project.surl.visitor.repository.VisitorRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.reactive.function.client.awaitBody
 import org.springframework.web.server.ResponseStatusException
 
 @Service
 class UrlService(
     private val urlRepository: UrlRepository,
     private val visitorRepository: VisitorRepository,
+    private val webClient: WebClient,
 ) {
 
     companion object {
@@ -46,9 +49,24 @@ class UrlService(
         val visitorEntity = VisitorEntity(
             urlId = urlEntity.id,
             ip = ip,
+            country = getVisitorCountry(ip),
         )
         visitorRepository.save(visitorEntity)
 
         return urlEntity.url
+    }
+
+    suspend fun getVisitorCountry(ip: String): String {
+        val client = webClient.get().uri { uri ->
+            uri.scheme("http")
+                .host("ip2c.org")
+                .queryParam("ip", ip)
+                .build()
+        }.retrieve()
+            .onStatus({ it.isError }) {
+                throw ResponseStatusException(it.statusCode(), "Country Get Failed.")
+            }
+
+        return client.awaitBody<String>()
     }
 }
