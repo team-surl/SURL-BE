@@ -13,7 +13,7 @@ class CorsFilter {
     @Bean
     fun corsWebFilter(): CorsWebFilter {
         val corsConfig = CorsConfiguration()
-        corsConfig.addAllowedOrigin("http://localhost:3000")
+        corsConfig.addAllowedOrigin("*")
         corsConfig.maxAge = 3600L
         corsConfig.addAllowedMethod(HttpMethod.GET)
         corsConfig.addAllowedMethod(HttpMethod.POST)
