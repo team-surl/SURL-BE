@@ -11,7 +11,7 @@ class WebConfig : WebFluxConfigurer {
 
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://127.0.0.1:3000", "http://127.0.0.1:3001")
+            .allowedOrigins("http://localhost:3000", "http://localhost:3001")
             .allowedMethods("GET", "POST", "PUT", "DELETE")
             .allowCredentials(true).maxAge(3600)
     }
