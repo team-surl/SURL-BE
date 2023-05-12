@@ -4,6 +4,7 @@ import com.project.surl.url.controller.dto.request.GenerateShortUrlRequest
 import com.project.surl.url.controller.dto.response.GetShortUrlResponse
 import com.project.surl.url.service.UrlService
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -14,6 +15,7 @@ class UrlController(
     private val urlService: UrlService,
 ) {
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/short-url")
     suspend fun generateShortUrl(@RequestBody request: GenerateShortUrlRequest): GetShortUrlResponse {
