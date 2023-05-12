@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
+@CrossOrigin("http://localhost:3000", maxAge = 3600)
 @RestController
 class UrlController(
     private val urlService: UrlService,
 ) {
 
-    @CrossOrigin(origins = ["http://localhost:3000"])
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/short-url")
     suspend fun generateShortUrl(@RequestBody request: GenerateShortUrlRequest): GetShortUrlResponse {
