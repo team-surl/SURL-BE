@@ -22,7 +22,7 @@ class UrlService(
 ) {
 
     companion object {
-        private const val BASE_URL = "http://surl.daehyun.dev"
+        private const val BASE_URL = "https://daehyun.dev"
     }
 
     @Transactional
