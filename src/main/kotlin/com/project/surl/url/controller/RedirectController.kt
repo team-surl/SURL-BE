@@ -2,6 +2,7 @@ package com.project.surl.url.controller
 
 import com.project.surl.global.ip.annotation.ClientIp
 import com.project.surl.url.service.UrlService
+import org.springframework.http.HttpStatus.*
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,10 +15,12 @@ class RedirectController(
 
     @GetMapping("/{shortUrl}")
     suspend fun getUrl(
+        @ClientIp clientIp: String,
         @PathVariable shortUrl: String,
-        @ClientIp ip: String,
     ): RedirectView {
-        val url = urlService.getUrl(shortUrl, ip)
-        return RedirectView(url)
+        val redirectUrl = urlService.getUrl(shortUrl, clientIp)
+        return RedirectView(redirectUrl).apply {
+            statusCode = MOVED_PERMANENTLY
+        }
     }
 }

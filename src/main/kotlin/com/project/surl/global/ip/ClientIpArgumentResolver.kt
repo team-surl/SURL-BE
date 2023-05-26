@@ -15,5 +15,8 @@ class ClientIpArgumentResolver : HandlerMethodArgumentResolver {
         parameter: MethodParameter,
         bindingContext: BindingContext,
         exchange: ServerWebExchange,
-    ): Mono<Any> = Mono.justOrEmpty(exchange.request.remoteAddress?.address?.hostAddress)
+    ): Mono<Any> {
+        val clientIp = exchange.request.headers.getFirst("X-Forwarded-For")
+        return Mono.just(clientIp ?: "127.0.0.1")
+    }
 }
