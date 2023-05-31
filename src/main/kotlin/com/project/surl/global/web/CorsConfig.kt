@@ -10,7 +10,7 @@ import org.springframework.web.reactive.config.WebFluxConfigurer
 class CorsConfig : WebFluxConfigurer {
     override fun addCorsMappings(corsRegistry: CorsRegistry) {
         corsRegistry.addMapping("/**")
-            .allowedOrigins("http://localhost:3000", "https://surl-fe.vercel.app")
+            .allowedOrigins("*")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS")
             .maxAge(3600)
     }
