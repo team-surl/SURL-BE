@@ -1,14 +1,17 @@
 package com.project.surl.global.web
 
-import org.springframework.stereotype.Component
+import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.config.CorsRegistry
+import org.springframework.web.reactive.config.EnableWebFlux
 import org.springframework.web.reactive.config.WebFluxConfigurer
 
-@Component
-class WebConfig : WebFluxConfigurer {
+@Configuration
+@EnableWebFlux
+class CorsConfig : WebFluxConfigurer {
     override fun addCorsMappings(corsRegistry: CorsRegistry) {
         corsRegistry.addMapping("/**")
             .allowedOrigins("http://localhost:3000", "https://surl-fe.vercel.app")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS")
+            .maxAge(3600)
     }
 }
