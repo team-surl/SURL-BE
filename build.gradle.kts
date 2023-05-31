@@ -22,6 +22,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
     implementation("com.auth0:java-jwt:4.4.0")
 
     implementation("at.favre.lib:bcrypt:0.10.2")
