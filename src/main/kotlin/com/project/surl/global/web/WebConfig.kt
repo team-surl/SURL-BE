@@ -9,9 +9,8 @@ class WebConfig : WebFluxConfigurer {
     override fun addCorsMappings(corsRegistry: CorsRegistry) {
         corsRegistry.addMapping("/**")
             .allowedMethods("*")
-            .allowedOriginPatterns("*")
             .allowCredentials(true)
-            .allowedOrigins("*")
+            .allowedOrigins("http://localhost:3000", "https://surl-fe.vercel.app")
             .maxAge(3600)
     }
 }
