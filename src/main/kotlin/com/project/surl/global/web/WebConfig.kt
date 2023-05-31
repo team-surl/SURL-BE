@@ -11,6 +11,7 @@ class WebConfig : WebFluxConfigurer {
             .allowedMethods("*")
             .allowedOriginPatterns("*")
             .allowCredentials(true)
+            .allowedOrigins("*")
             .maxAge(3600)
     }
 }
