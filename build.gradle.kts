@@ -26,9 +26,11 @@ dependencies {
 
     implementation("at.favre.lib:bcrypt:0.10.2")
 
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-
     runtimeOnly("com.github.jasync-sql:jasync-r2dbc-mysql:2.1.16")
+
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
