@@ -4,7 +4,7 @@ import com.project.surl.url.controller.dto.request.GenerateShortUrlRequest
 import com.project.surl.url.controller.dto.response.GetShortUrlResponse
 import com.project.surl.url.service.UrlService
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -17,7 +17,7 @@ class UrlController(
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/short-url")
-    suspend fun generateShortUrl(@RequestBody request: GenerateShortUrlRequest): GetShortUrlResponse {
+    suspend fun generateShortUrl(@Validated @RequestBody request: GenerateShortUrlRequest): GetShortUrlResponse {
         return urlService.generateShortUrl(request)
     }
 }
